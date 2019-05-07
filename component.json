@@ -1,0 +1,271 @@
+{
+    "title": "SharedImageGalleryServiceClient",
+    "description": "Shared Image Gallery Service Client.",
+    "docsUrl": "",
+    "url": "https://api.apis.guru/v2/specs/azure.com/compute-gallery/2018-06-01/swagger.json",
+    "envVars": {
+        "OAUTH_CLIENT_ID": {
+            "description": "OAuth Client ID"
+        },
+        "OAUTH_CLIENT_SECRET": {
+            "description": "OAuth Client Secret"
+        }
+    },
+    "credentials": {
+        "fields": {
+            "server": {
+                "label": "Server",
+                "viewClass": "SelectView",
+                "model": [
+                    "https://management.azure.com/",
+                    "--- Custom URL"
+                ],
+                "required": true
+            },
+            "otherServer": {
+                "label": "Custom Server URL",
+                "viewClass": "TextFieldView"
+            },
+            "azure_auth": {
+                "label": "Azure Active Directory OAuth2 Flow",
+                "viewClass": "OAuthFieldView"
+            }
+        },
+        "oauth2": {
+            "client_id": "{{OAUTH_CLIENT_ID}}",
+            "client_secret": "{{OAUTH_CLIENT_SECRET}}",
+            "auth_uri": "https://login.microsoftonline.com/common/oauth2/authorize"
+        }
+    },
+    "triggers": {
+        "startFlow": {
+            "main": "./lib/triggers/startFlow.js",
+            "type": "polling",
+            "title": "Start Flow",
+            "fields": {}
+        }
+    },
+    "actions": {
+        "Galleries_List": {
+            "main": "./lib/actions/Galleries_List.js",
+            "title": "List galleries under a subscription.",
+            "description": "List galleries under a subscription.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/Galleries_List.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "Galleries_ListByResourceGroup": {
+            "main": "./lib/actions/Galleries_ListByResourceGroup.js",
+            "title": "List galleries under a resource group.",
+            "description": "List galleries under a resource group.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/Galleries_ListByResourceGroup.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "Galleries_Delete": {
+            "main": "./lib/actions/Galleries_Delete.js",
+            "title": "Delete a Shared Image Gallery.",
+            "description": "Delete a Shared Image Gallery.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/Galleries_Delete.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "Galleries_Get": {
+            "main": "./lib/actions/Galleries_Get.js",
+            "title": "Retrieves information about a Shared Image Gallery.",
+            "description": "Retrieves information about a Shared Image Gallery.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/Galleries_Get.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "Galleries_CreateOrUpdate": {
+            "main": "./lib/actions/Galleries_CreateOrUpdate.js",
+            "title": "Create or update a Shared Image Gallery.",
+            "description": "Create or update a Shared Image Gallery.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/Galleries_CreateOrUpdate.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "GalleryImages_ListByGallery": {
+            "main": "./lib/actions/GalleryImages_ListByGallery.js",
+            "title": "List gallery Image Definitions in a gallery.",
+            "description": "List gallery Image Definitions in a gallery.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/GalleryImages_ListByGallery.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "GalleryImages_Delete": {
+            "main": "./lib/actions/GalleryImages_Delete.js",
+            "title": "Delete a gallery image.",
+            "description": "Delete a gallery image.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/GalleryImages_Delete.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "GalleryImages_Get": {
+            "main": "./lib/actions/GalleryImages_Get.js",
+            "title": "Retrieves information about a gallery Image Definition.",
+            "description": "Retrieves information about a gallery Image Definition.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/GalleryImages_Get.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "GalleryImages_CreateOrUpdate": {
+            "main": "./lib/actions/GalleryImages_CreateOrUpdate.js",
+            "title": "Create or update a gallery Image Definition.",
+            "description": "Create or update a gallery Image Definition.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/GalleryImages_CreateOrUpdate.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "GalleryImageVersions_ListByGalleryImage": {
+            "main": "./lib/actions/GalleryImageVersions_ListByGalleryImage.js",
+            "title": "List gallery Image Versions in a gallery Image Definition.",
+            "description": "List gallery Image Versions in a gallery Image Definition.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/GalleryImageVersions_ListByGalleryImage.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "GalleryImageVersions_Delete": {
+            "main": "./lib/actions/GalleryImageVersions_Delete.js",
+            "title": "Delete a gallery Image Version.",
+            "description": "Delete a gallery Image Version.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/GalleryImageVersions_Delete.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "GalleryImageVersions_Get": {
+            "main": "./lib/actions/GalleryImageVersions_Get.js",
+            "title": "Retrieves information about a gallery Image Version.",
+            "description": "Retrieves information about a gallery Image Version.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/GalleryImageVersions_Get.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "GalleryImageVersions_CreateOrUpdate": {
+            "main": "./lib/actions/GalleryImageVersions_CreateOrUpdate.js",
+            "title": "Create or update a gallery Image Version.",
+            "description": "Create or update a gallery Image Version.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/GalleryImageVersions_CreateOrUpdate.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        }
+    }
+}

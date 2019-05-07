@@ -1,0 +1,36 @@
+{
+    "type": "object",
+    "properties": {
+        "subscriptionId": {
+            "required": true,
+            "type": "string"
+        },
+        "resourceGroupName": {
+            "required": true,
+            "type": "string"
+        },
+        "galleryName": {
+            "required": true,
+            "type": "string"
+        },
+        "galleryImageName": {
+            "required": true,
+            "type": "string"
+        },
+        "galleryImageVersionName": {
+            "required": true,
+            "type": "string"
+        },
+        "_expand": {
+            "required": false,
+            "type": "string",
+            "enum": [
+                "ReplicationStatus"
+            ]
+        },
+        "api_version": {
+            "required": true,
+            "type": "string"
+        }
+    }
+}

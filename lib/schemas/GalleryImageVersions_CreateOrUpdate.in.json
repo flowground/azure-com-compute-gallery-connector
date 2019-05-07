@@ -1,0 +1,325 @@
+{
+    "type": "object",
+    "properties": {
+        "subscriptionId": {
+            "required": true,
+            "type": "string"
+        },
+        "resourceGroupName": {
+            "required": true,
+            "type": "string"
+        },
+        "galleryName": {
+            "required": true,
+            "type": "string"
+        },
+        "galleryImageName": {
+            "required": true,
+            "type": "string"
+        },
+        "galleryImageVersionName": {
+            "required": true,
+            "type": "string"
+        },
+        "requestBody": {
+            "allOf": [
+                {
+                    "description": "The Resource model definition.",
+                    "properties": {
+                        "id": {
+                            "description": "Resource Id",
+                            "readOnly": true,
+                            "type": "string"
+                        },
+                        "location": {
+                            "description": "Resource location",
+                            "type": "string"
+                        },
+                        "name": {
+                            "description": "Resource name",
+                            "readOnly": true,
+                            "type": "string"
+                        },
+                        "tags": {
+                            "additionalProperties": {
+                                "type": "string"
+                            },
+                            "description": "Resource tags",
+                            "type": "object"
+                        },
+                        "type": {
+                            "description": "Resource type",
+                            "readOnly": true,
+                            "type": "string"
+                        }
+                    },
+                    "required": [
+                        "location"
+                    ],
+                    "x-ms-azure-resource": true,
+                    "type": "object"
+                }
+            ],
+            "description": "Specifies information about the gallery Image Version that you want to create or update.",
+            "properties": {
+                "properties": {
+                    "x-ms-client-flatten": true,
+                    "description": "Describes the properties of a gallery Image Version.",
+                    "properties": {
+                        "provisioningState": {
+                            "description": "The provisioning state, which only appears in the response.",
+                            "enum": [
+                                "Creating",
+                                "Updating",
+                                "Failed",
+                                "Succeeded",
+                                "Deleting",
+                                "Migrating"
+                            ],
+                            "readOnly": true,
+                            "title": "The current state of the gallery Image Version.",
+                            "type": "string"
+                        },
+                        "publishingProfile": {
+                            "allOf": [
+                                {
+                                    "description": "Describes the basic gallery artifact publishing profile.",
+                                    "properties": {
+                                        "source": {
+                                            "description": "The source image from which the Image Version is going to be created.",
+                                            "properties": {
+                                                "managedImage": {
+                                                    "description": "The managed artifact.",
+                                                    "properties": {
+                                                        "id": {
+                                                            "description": "The managed artifact id.",
+                                                            "type": "string"
+                                                        }
+                                                    },
+                                                    "required": [
+                                                        "id"
+                                                    ],
+                                                    "type": "object"
+                                                }
+                                            },
+                                            "required": [
+                                                "managedImage"
+                                            ],
+                                            "type": "object"
+                                        },
+                                        "targetRegions": {
+                                            "description": "The target regions where the Image Version is going to be replicated to. This property is updatable.",
+                                            "items": {
+                                                "description": "Describes the target region information.",
+                                                "properties": {
+                                                    "name": {
+                                                        "description": "The name of the region.",
+                                                        "type": "string"
+                                                    },
+                                                    "regionalReplicaCount": {
+                                                        "description": "The number of replicas of the Image Version to be created per region. This property is updatable.",
+                                                        "format": "int32",
+                                                        "type": "integer"
+                                                    }
+                                                },
+                                                "required": [
+                                                    "name"
+                                                ],
+                                                "type": "object"
+                                            },
+                                            "type": "array"
+                                        }
+                                    },
+                                    "required": [
+                                        "source"
+                                    ],
+                                    "type": "object"
+                                }
+                            ],
+                            "description": "The publishing profile of a gallery Image Version.",
+                            "properties": {
+                                "endOfLifeDate": {
+                                    "description": "The end of life date of the gallery Image Version. This property can be used for decommissioning purposes. This property is updatable.",
+                                    "format": "date-time",
+                                    "type": "string"
+                                },
+                                "excludeFromLatest": {
+                                    "description": "If set to true, Virtual Machines deployed from the latest version of the Image Definition won't use this Image Version.",
+                                    "type": "boolean"
+                                },
+                                "publishedDate": {
+                                    "description": "The timestamp for when the gallery Image Version is published.",
+                                    "format": "date-time",
+                                    "readOnly": true,
+                                    "type": "string"
+                                },
+                                "replicaCount": {
+                                    "description": "The number of replicas of the Image Version to be created per region. This property would take effect for a region when regionalReplicaCount is not specified. This property is updatable.",
+                                    "format": "int32",
+                                    "type": "integer"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "replicationStatus": {
+                            "readOnly": true,
+                            "description": "This is the replication status of the gallery Image Version.",
+                            "properties": {
+                                "aggregatedState": {
+                                    "description": "This is the aggregated replication status based on all the regional replication status flags.",
+                                    "enum": [
+                                        "Unknown",
+                                        "InProgress",
+                                        "Completed",
+                                        "Failed"
+                                    ],
+                                    "readOnly": true,
+                                    "type": "string",
+                                    "x-ms-enum": {
+                                        "modelAsString": true,
+                                        "name": "AggregatedReplicationState"
+                                    }
+                                },
+                                "summary": {
+                                    "description": "This is a summary of replication status for each region.",
+                                    "items": {
+                                        "description": "This is the regional replication status.",
+                                        "properties": {
+                                            "details": {
+                                                "description": "The details of the replication status.",
+                                                "readOnly": true,
+                                                "type": "string"
+                                            },
+                                            "progress": {
+                                                "description": "It indicates progress of the replication job.",
+                                                "format": "int32",
+                                                "readOnly": true,
+                                                "type": "integer"
+                                            },
+                                            "region": {
+                                                "description": "The region to which the gallery Image Version is being replicated to.",
+                                                "readOnly": true,
+                                                "type": "string"
+                                            },
+                                            "state": {
+                                                "description": "This is the regional replication state.",
+                                                "enum": [
+                                                    "Unknown",
+                                                    "Replicating",
+                                                    "Completed",
+                                                    "Failed"
+                                                ],
+                                                "readOnly": true,
+                                                "type": "string",
+                                                "x-ms-enum": {
+                                                    "modelAsString": true,
+                                                    "name": "ReplicationState"
+                                                }
+                                            }
+                                        },
+                                        "type": "object"
+                                    },
+                                    "readOnly": true,
+                                    "type": "array"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "storageProfile": {
+                            "readOnly": true,
+                            "description": "This is the storage profile of a gallery Image Version.",
+                            "properties": {
+                                "dataDiskImages": {
+                                    "description": "A list of data disk images.",
+                                    "items": {
+                                        "allOf": [
+                                            {
+                                                "description": "This is the disk image base class.",
+                                                "properties": {
+                                                    "hostCaching": {
+                                                        "description": "The host caching of the disk. Valid values are 'None', 'ReadOnly', and 'ReadWrite'",
+                                                        "enum": [
+                                                            "None",
+                                                            "ReadOnly",
+                                                            "ReadWrite"
+                                                        ],
+                                                        "readOnly": true,
+                                                        "type": "string",
+                                                        "x-ms-enum": {
+                                                            "modelAsString": false,
+                                                            "name": "HostCaching"
+                                                        }
+                                                    },
+                                                    "sizeInGB": {
+                                                        "description": "This property indicates the size of the VHD to be created.",
+                                                        "format": "int32",
+                                                        "readOnly": true,
+                                                        "type": "integer"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            }
+                                        ],
+                                        "description": "This is the data disk image.",
+                                        "properties": {
+                                            "lun": {
+                                                "description": "This property specifies the logical unit number of the data disk. This value is used to identify data disks within the Virtual Machine and therefore must be unique for each data disk attached to the Virtual Machine.",
+                                                "format": "int32",
+                                                "readOnly": true,
+                                                "type": "integer"
+                                            }
+                                        },
+                                        "type": "object"
+                                    },
+                                    "readOnly": true,
+                                    "type": "array"
+                                },
+                                "osDiskImage": {
+                                    "readOnly": true,
+                                    "allOf": [
+                                        {
+                                            "description": "This is the disk image base class.",
+                                            "properties": {
+                                                "hostCaching": {
+                                                    "description": "The host caching of the disk. Valid values are 'None', 'ReadOnly', and 'ReadWrite'",
+                                                    "enum": [
+                                                        "None",
+                                                        "ReadOnly",
+                                                        "ReadWrite"
+                                                    ],
+                                                    "readOnly": true,
+                                                    "type": "string",
+                                                    "x-ms-enum": {
+                                                        "modelAsString": false,
+                                                        "name": "HostCaching"
+                                                    }
+                                                },
+                                                "sizeInGB": {
+                                                    "description": "This property indicates the size of the VHD to be created.",
+                                                    "format": "int32",
+                                                    "readOnly": true,
+                                                    "type": "integer"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    ],
+                                    "description": "This is the OS disk image."
+                                }
+                            },
+                            "type": "object"
+                        }
+                    },
+                    "required": [
+                        "publishingProfile"
+                    ]
+                }
+            },
+            "type": "object"
+        },
+        "api_version": {
+            "required": true,
+            "type": "string"
+        }
+    }
+}

@@ -1,0 +1,100 @@
+{
+    "type": "object",
+    "properties": {
+        "subscriptionId": {
+            "required": true,
+            "type": "string"
+        },
+        "resourceGroupName": {
+            "required": true,
+            "type": "string"
+        },
+        "galleryName": {
+            "required": true,
+            "type": "string"
+        },
+        "requestBody": {
+            "allOf": [
+                {
+                    "description": "The Resource model definition.",
+                    "properties": {
+                        "id": {
+                            "description": "Resource Id",
+                            "readOnly": true,
+                            "type": "string"
+                        },
+                        "location": {
+                            "description": "Resource location",
+                            "type": "string"
+                        },
+                        "name": {
+                            "description": "Resource name",
+                            "readOnly": true,
+                            "type": "string"
+                        },
+                        "tags": {
+                            "additionalProperties": {
+                                "type": "string"
+                            },
+                            "description": "Resource tags",
+                            "type": "object"
+                        },
+                        "type": {
+                            "description": "Resource type",
+                            "readOnly": true,
+                            "type": "string"
+                        }
+                    },
+                    "required": [
+                        "location"
+                    ],
+                    "x-ms-azure-resource": true,
+                    "type": "object"
+                }
+            ],
+            "description": "Specifies information about the Shared Image Gallery that you want to create or update.",
+            "properties": {
+                "properties": {
+                    "x-ms-client-flatten": true,
+                    "description": "Describes the properties of a Shared Image Gallery.",
+                    "properties": {
+                        "description": {
+                            "description": "The description of this Shared Image Gallery resource. This property is updatable.",
+                            "type": "string"
+                        },
+                        "identifier": {
+                            "description": "Describes the gallery unique name.",
+                            "properties": {
+                                "uniqueName": {
+                                    "description": "The unique name of the Shared Image Gallery. This name is generated automatically by Azure.",
+                                    "readOnly": true,
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "provisioningState": {
+                            "description": "The provisioning state, which only appears in the response.",
+                            "enum": [
+                                "Creating",
+                                "Updating",
+                                "Failed",
+                                "Succeeded",
+                                "Deleting",
+                                "Migrating"
+                            ],
+                            "readOnly": true,
+                            "title": "The current state of the gallery.",
+                            "type": "string"
+                        }
+                    }
+                }
+            },
+            "type": "object"
+        },
+        "api_version": {
+            "required": true,
+            "type": "string"
+        }
+    }
+}

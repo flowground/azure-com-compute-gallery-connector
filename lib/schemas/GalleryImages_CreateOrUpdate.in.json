@@ -1,0 +1,231 @@
+{
+    "type": "object",
+    "properties": {
+        "subscriptionId": {
+            "required": true,
+            "type": "string"
+        },
+        "resourceGroupName": {
+            "required": true,
+            "type": "string"
+        },
+        "galleryName": {
+            "required": true,
+            "type": "string"
+        },
+        "galleryImageName": {
+            "required": true,
+            "type": "string"
+        },
+        "requestBody": {
+            "allOf": [
+                {
+                    "description": "The Resource model definition.",
+                    "properties": {
+                        "id": {
+                            "description": "Resource Id",
+                            "readOnly": true,
+                            "type": "string"
+                        },
+                        "location": {
+                            "description": "Resource location",
+                            "type": "string"
+                        },
+                        "name": {
+                            "description": "Resource name",
+                            "readOnly": true,
+                            "type": "string"
+                        },
+                        "tags": {
+                            "additionalProperties": {
+                                "type": "string"
+                            },
+                            "description": "Resource tags",
+                            "type": "object"
+                        },
+                        "type": {
+                            "description": "Resource type",
+                            "readOnly": true,
+                            "type": "string"
+                        }
+                    },
+                    "required": [
+                        "location"
+                    ],
+                    "x-ms-azure-resource": true,
+                    "type": "object"
+                }
+            ],
+            "description": "Specifies information about the gallery Image Definition that you want to create or update.",
+            "properties": {
+                "properties": {
+                    "x-ms-client-flatten": true,
+                    "description": "Describes the properties of a gallery Image Definition.",
+                    "properties": {
+                        "description": {
+                            "description": "The description of this gallery Image Definition resource. This property is updatable.",
+                            "type": "string"
+                        },
+                        "disallowed": {
+                            "description": "Describes the disallowed disk types.",
+                            "properties": {
+                                "diskTypes": {
+                                    "description": "A list of disk types.",
+                                    "items": {
+                                        "type": "string"
+                                    },
+                                    "type": "array"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "endOfLifeDate": {
+                            "description": "The end of life date of the gallery Image Definition. This property can be used for decommissioning purposes. This property is updatable.",
+                            "format": "date-time",
+                            "type": "string"
+                        },
+                        "eula": {
+                            "description": "The Eula agreement for the gallery Image Definition.",
+                            "type": "string"
+                        },
+                        "identifier": {
+                            "description": "This is the gallery Image Definition identifier.",
+                            "properties": {
+                                "offer": {
+                                    "description": "The name of the gallery Image Definition offer.",
+                                    "type": "string"
+                                },
+                                "publisher": {
+                                    "description": "The name of the gallery Image Definition publisher.",
+                                    "type": "string"
+                                },
+                                "sku": {
+                                    "description": "The name of the gallery Image Definition SKU.",
+                                    "type": "string"
+                                }
+                            },
+                            "required": [
+                                "publisher",
+                                "offer",
+                                "sku"
+                            ],
+                            "type": "object"
+                        },
+                        "osState": {
+                            "description": "The allowed values for OS State are 'Generalized'.",
+                            "enum": [
+                                "Generalized",
+                                "Specialized"
+                            ],
+                            "type": "string",
+                            "x-ms-enum": {
+                                "modelAsString": false,
+                                "name": "OperatingSystemStateTypes"
+                            }
+                        },
+                        "osType": {
+                            "description": "This property allows you to specify the type of the OS that is included in the disk when creating a VM from a managed image. <br><br> Possible values are: <br><br> **Windows** <br><br> **Linux**",
+                            "enum": [
+                                "Windows",
+                                "Linux"
+                            ],
+                            "type": "string",
+                            "x-ms-enum": {
+                                "modelAsString": false,
+                                "name": "OperatingSystemTypes"
+                            }
+                        },
+                        "privacyStatementUri": {
+                            "description": "The privacy statement uri.",
+                            "type": "string"
+                        },
+                        "provisioningState": {
+                            "description": "The provisioning state, which only appears in the response.",
+                            "enum": [
+                                "Creating",
+                                "Updating",
+                                "Failed",
+                                "Succeeded",
+                                "Deleting",
+                                "Migrating"
+                            ],
+                            "readOnly": true,
+                            "title": "The current state of the gallery Image Definition.",
+                            "type": "string"
+                        },
+                        "purchasePlan": {
+                            "description": "Describes the gallery Image Definition purchase plan. This is used by marketplace images.",
+                            "properties": {
+                                "name": {
+                                    "description": "The plan ID.",
+                                    "type": "string"
+                                },
+                                "product": {
+                                    "description": "The product ID.",
+                                    "type": "string"
+                                },
+                                "publisher": {
+                                    "description": "The publisher ID.",
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "recommended": {
+                            "description": "The properties describe the recommended machine configuration for this Image Definition. These properties are updatable.",
+                            "properties": {
+                                "memory": {
+                                    "description": "Describes the resource range.",
+                                    "properties": {
+                                        "max": {
+                                            "description": "The maximum number of the resource.",
+                                            "format": "int32",
+                                            "type": "integer"
+                                        },
+                                        "min": {
+                                            "description": "The minimum number of the resource.",
+                                            "format": "int32",
+                                            "type": "integer"
+                                        }
+                                    },
+                                    "type": "object"
+                                },
+                                "vCPUs": {
+                                    "description": "Describes the resource range.",
+                                    "properties": {
+                                        "max": {
+                                            "description": "The maximum number of the resource.",
+                                            "format": "int32",
+                                            "type": "integer"
+                                        },
+                                        "min": {
+                                            "description": "The minimum number of the resource.",
+                                            "format": "int32",
+                                            "type": "integer"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "releaseNoteUri": {
+                            "description": "The release note uri.",
+                            "type": "string"
+                        }
+                    },
+                    "required": [
+                        "osType",
+                        "osState",
+                        "identifier"
+                    ]
+                }
+            },
+            "type": "object"
+        },
+        "api_version": {
+            "required": true,
+            "type": "string"
+        }
+    }
+}
